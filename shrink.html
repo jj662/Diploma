@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-wrapper video {
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        #clickCount {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #playCount {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diploma Notes and question papers for S4 CT students</h1>
+        
+        <!-- Link with onclick event to track clicks -->
+        <a href="https://shrinkme.cc/DiplomaNotes" onclick="trackClick()">Click here</a>
+        
+        <h2>Tutorial👇</h2>
+
+        <div class="video-wrapper">
+            <video id="myVideo" width="320" height="240" controls onplay="trackPlay()">
+                <source src="shrink.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Display click count -->
+        <div id="clickCount"></div>
+
+        <!-- Display play count -->
+        <div id="playCount"></div>
+    </div>
+
+    <script>
+        // Function to track link clicks
+        function trackClick() {
+            // Check if 'clickCount' exists in local storage
+            if (localStorage.getItem('clickCount')) {
+                // If exists, increment click count by 1
+                let clickCount = parseInt(localStorage.getItem('clickCount'));
+                clickCount += 1;
+                localStorage.setItem('clickCount', clickCount);
+            } else {
+                // If not exists, set click count to 1
+                localStorage.setItem('clickCount', 1);
+            }
+
+            // Update click count display
+            document.getElementById('clickCount').textContent = 'Link Clicks: ' + localStorage.getItem('clickCount');
+        }
+
+        // Function to track video plays
+        function trackPlay() {
+            // Check if 'playCount' exists in local storage
+            if (localStorage.getItem('playCount')) {
+                // If exists, increment play count by 1
+                let playCount = parseInt(localStorage.getItem('playCount'));
+                playCount += 1;
+                localStorage.setItem('playCount', playCount);
+            } else {
+                // If not exists, set play count to 1
+                localStorage.setItem('playCount', 1);
+            }
+
+            // Update play count display
+            document.getElementById('playCount').textContent = 'Video Plays: ' + localStorage.getItem('playCount');
+        }
+
+        // Display initial counts on page load
+        window.onload = function() {
+            if (localStorage.getItem('clickCount')) {
+                document.getElementById('clickCount').textContent = 'Link Clicks: ' + localStorage.getItem('clickCount');
+            }
+
+            if (localStorage.getItem('playCount')) {
+                document.getElementById('playCount').textContent = 'Video Plays: ' + localStorage.getItem('playCount');
+            }
+        };
+    </script>
+</body>
+</html>
